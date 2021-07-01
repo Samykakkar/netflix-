@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 export const Inner = styled.div`
   display: flex;
@@ -46,19 +46,16 @@ export const Image = styled.img`
 `;
 
 export const Item = styled.div`
-  display: flex;
   border-bottom: 8px solid #222;
   padding: 50px 5%;
   color: white;
   overflow: hidden;
 `;
 
-
-export const Container = styled.div``;
-
-
-
-
-
-
-
+export const Container = styled.div`
+  @media (max-width: 1000px) {
+    ${Item}:last-of-type h2 {
+      margin-bottom: 50px;
+    }
+  }
+`;
