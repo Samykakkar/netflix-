@@ -13,7 +13,6 @@ export default function App() {
           <Jumbotron.Pane>
           <Jumbotron.Image src ={item.image} alt={item.alt}/>
           </Jumbotron.Pane>
-
         </Jumbotron>
       ))}
     </Jumbotron.Container>
