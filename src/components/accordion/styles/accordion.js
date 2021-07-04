@@ -9,13 +9,13 @@ export const Inner = styled.div`
   display: flex;
   padding: 70px 45px;
   flex-direction: column;
-  mas-width: 815px;
+  max-width: 750px;
   margin: auto;
 `;
 export const Item = styled.div`
   color: white;
   margin-bottom: 10px;
-  max-width: 670px;
+  max-width: 710px;
   width: 100%
   margin: auto;
 
