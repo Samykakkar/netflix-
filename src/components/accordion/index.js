@@ -1,7 +1,6 @@
 import React, { createContext, useState, useContext } from "react";
 import {
   Container,
-  Frame,
   Title,
   Item,
   Inner,
@@ -23,9 +22,6 @@ Accordion.Title = function AccordionTitle({ children, ...restprops }) {
   return <Title {...restprops}>{children}</Title>;
 };
 
-Accordion.Frame = function AccordionFrame({ children, ...restprops }) {
-  return <Frame {...restprops}>{children}</Frame>;
-};
 
 Accordion.Item = function AccordionItem({ children, ...restprops }) {
   const [ toggleShow, setToggleShow] = useState(false);

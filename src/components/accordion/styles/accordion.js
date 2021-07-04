@@ -16,6 +16,8 @@ export const Item = styled.div`
   color: white;
   margin-bottom: 10px;
   max-width: 670px;
+  width: 100%
+  margin: auto;
 
   &:first-of-type {
     margin-top: 3em;
@@ -62,8 +64,6 @@ export const Body = styled.div`
     line-height: 22px;
   }
 `;
-
-export const Frame = styled.div``;
 
 export const Title = styled.h1`
   font-size: 50px;
