@@ -30,6 +30,7 @@ export default function SignUp() {
             displayName: firstName,
             photoURL: Math.floor(Math.random() * 5) + 1,
           })
+      .user.reload()  
           .then(() => {
             history.push(ROUTES.BROWSE);
           })
