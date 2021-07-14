@@ -1,14 +1,15 @@
 import React, { useState, useContext, useEffect } from "react";
+import Fuse from "fuse.js";
 import { SelectProfileContainer } from "./profiles";
 import { FooterContainer } from "./footer";
 import { FirebaseContext } from "../context/firebase";
-import { Card, Loading, Header } from "../components";
+import { Card, Loading, Header, Player } from "../components";
 import logo from "../logo.svg";
 import * as ROUTES from "../constants/routes";
 
 export function BrowseContainer({ slides }) {
   const [category, setCategory] = useState("series");
-  const [searchTerm, setSeacrhTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
   const [slideRows, setSlideRows] = useState([]);
@@ -24,6 +25,19 @@ export function BrowseContainer({ slides }) {
   useEffect(() => {
     setSlideRows(slides[category]);
   }, [slides, category]);
+
+  useEffect(() => {
+    const fuse = new Fuse(slideRows, {
+      keys: ["data.description", "data.title", "data.genre"],
+    });
+    const results = fuse.search(searchTerm).map(({ item }) => item);
+
+    if (slideRows.length > 0 && searchTerm.length > 3 && results.length > 0) {
+      setSlideRows(results);
+    } else {
+      setSlideRows(slides[category]);
+    }
+  }, [searchTerm]);
 
   return profile.displayName ? (
     <>
@@ -48,7 +62,7 @@ export function BrowseContainer({ slides }) {
           <Header.Group>
             <Header.Search
               searchTerm={searchTerm}
-              setSeacrhTerm={setSeacrhTerm}
+              setSearchTerm={setSearchTerm}
             />
             <Header.Profile>
               <Header.Picture src={user.photoURL} />
@@ -58,7 +72,7 @@ export function BrowseContainer({ slides }) {
                   <Header.TextLink>{user.displayName}</Header.TextLink>
                 </Header.Group>
                 <Header.Group>
-                  <Header.TextLink onClick={() => firebase.auth().signout()}>
+                  <Header.TextLink onClick={() => firebase.auth().signOut()}>
                     Sign Out
                   </Header.TextLink>
                 </Header.Group>
@@ -96,7 +110,10 @@ export function BrowseContainer({ slides }) {
               ))}
             </Card.Entities>
             <Card.Feature category={category}>
-              <p>Hello</p>
+              <Player>
+                <Player.Button />
+                <Player.Video src="/videos/bunny.mp4" />
+              </Player>
             </Card.Feature>
           </Card>
         ))}

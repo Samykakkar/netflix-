@@ -1,93 +1,101 @@
-import React, {useState} from "react";
-import { Link as ReactRouterLink } from "react-router-dom";
+import React, { useState } from 'react';
+import { Link as ReachRouterLink } from 'react-router-dom';
 import {
-  Background,
   Container,
-  ButtonLink,
-  Logo,
-  Link,
-  Feature,
   Group,
+  Background,
   Dropdown,
-  Search,
-  PlayButton,
-  SearchIcon,
-  SearchInput,
   Picture,
+  Link,
+  Search,
   Profile,
   FeatureCallOut,
+  SearchIcon,
+  SearchInput,
+  ButtonLink,
+  PlayButton,
   Text,
-} from "./styles/header";
+  Feature,
+  Logo,
+} from './styles/header';
 
-export default function Header({ bg = true, children, ...restprops }) {
-  return bg ? <Background {...restprops}>{children}</Background> : children;
+export default function Header({ bg = true, children, ...restProps }) {
+  return bg ? (
+    <Background data-testid="header-bg" {...restProps}>
+      {children}
+    </Background>
+  ) : (
+    children
+  );
 }
-Header.FeatureCallOut = function HeaderFeatureCallOut({
-  children,
-  ...restprops
-}) {
-  return <FeatureCallOut {...restprops}> {children}</FeatureCallOut>;
-};
-Header.Profile = function HeaderProfile({ children, ...restprops }) {
-  return <Profile {...restprops}>{children}</Profile>;
+
+Header.Frame = function HeaderFrame({ children, ...restProps }) {
+  return <Container {...restProps}>{children}</Container>;
 };
 
-Header.Feature = function HeaderFeature({ children, ...restprops }) {
-  return <Feature {...restprops}>{children}</Feature>;
+Header.Group = function HeaderGroup({ children, ...restProps }) {
+  return <Group {...restProps}>{children}</Group>;
 };
 
-Header.Dropdown = function HeaderDropdown({ children, ...restprops }) {
-  return <Dropdown {...restprops}>{children}</Dropdown>;
+Header.Logo = function HeaderLogo({ to, ...restProps }) {
+  return (
+    <ReachRouterLink to={to}>
+      <Logo {...restProps} />
+    </ReachRouterLink>
+  );
 };
 
-Header.Text = function HeaderText({ children, ...restprops }) {
-  return <Text {...restprops}>{children}</Text>;
-};
+Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps }) {
+  const [searchActive, setSearchActive] = useState(false);
 
-Header.PlayButton = function HeaderPlayButton({ children, ...restprops }) {
-  return <PlayButton {...restprops}>{children}</PlayButton>;
-};
-
-Header.TextLink = function HeaderLink({ children, ...restprops }) {
-  return <Link {...restprops}>{children}</Link>;
-};
-
-Header.Picture = function HeaderPicture({ src, ...restprops }) {
-  return <Picture {...restprops} src={`/images/users/${src}.png`} />;
-};
-
-Header.Search = function HeaderSearch({ searchTerm, setSearchTerm, ...restProps}) {
-  const[searchActive, setSearchActive] =useState('false'); 
-  return(
+  return (
     <Search {...restProps}>
-      <SearchIcon onClick={()=> setSearchActive(searchActive=>!searchActive)}>
-        <img src="/images/icons/search.png" alt="Search"/>
+      <SearchIcon onClick={() => setSearchActive((searchActive) => !searchActive)} data-testid="search-click">
+        <img src="/images/icons/search.png" alt="Search" />
       </SearchIcon>
-      <SearchInput value ={searchTerm}
-      onChange={({target})=>setSearchTerm(target.value)}
-      placeholder="Search films and series"
-      active={searchActive}
+      <SearchInput
+        value={searchTerm}
+        onChange={({ target }) => setSearchTerm(target.value)}
+        placeholder="Search films and series"
+        active={searchActive}
+        data-testid="search-input"
       />
     </Search>
-  )
-}
-
-Header.Frame = function HeaderFrame({ children, ...restprops }) {
-  return <Container {...restprops}>{children}</Container>;
-};
-
-Header.Group = function HeaderGroup({ children, ...restprops }) {
-  return <Group {...restprops}>{children}</Group>;
-};
-
-Header.ButtonLink = function HeaderButtonLink({ children, ...restprops }) {
-  return <ButtonLink {...restprops}>{children}</ButtonLink>;
-};
-
-Header.Logo = function HeaderLogo({ to, ...restprops }) {
-  return (
-    <ReactRouterLink to={to}>
-      <Logo {...restprops} />
-    </ReactRouterLink>
   );
+};
+
+Header.Profile = function HeaderProfile({ children, ...restProps }) {
+  return <Profile {...restProps}>{children}</Profile>;
+};
+
+Header.Feature = function HeaderFeature({ children, ...restProps }) {
+  return <Feature>{children}</Feature>;
+};
+
+Header.Picture = function HeaderPicture({ src, ...restProps }) {
+  return <Picture {...restProps} src={`/images/users/${src}.png`} />;
+};
+
+Header.Dropdown = function HeaderDropdown({ children, ...restProps }) {
+  return <Dropdown {...restProps}>{children}</Dropdown>;
+};
+
+Header.TextLink = function HeaderTextLink({ children, ...restProps }) {
+  return <Link {...restProps}>{children}</Link>;
+};
+
+Header.PlayButton = function HeaderPlayButton({ children, ...restProps }) {
+  return <PlayButton {...restProps}>{children}</PlayButton>;
+};
+
+Header.FeatureCallOut = function HeaderFeatureCallOut({ children, ...restProps }) {
+  return <FeatureCallOut {...restProps}>{children}</FeatureCallOut>;
+};
+
+Header.Text = function HeaderText({ children, ...restProps }) {
+  return <Text {...restProps}>{children}</Text>;
+};
+
+Header.ButtonLink = function HeaderButtonLink({ children, ...restProps }) {
+  return <ButtonLink {...restProps}>{children}</ButtonLink>;
 };

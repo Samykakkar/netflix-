@@ -1,11 +1,12 @@
 import React, { useState, useContext, createContext } from "react";
+
 import {
   Container,
   Group,
   Title,
   SubTitle,
-  Feature,
   Text,
+  Feature,
   FeatureTitle,
   FeatureText,
   FeatureClose,
@@ -19,48 +20,44 @@ import {
 
 export const FeatureContext = createContext();
 
-export default function Card({ children, ...restprops }) {
-    const [showFeature, setShowFeature] = useState(false);
-    const [itemFeature, setItemFeature] = useState({});
+export default function Card({ children, ...restProps }) {
+  const [showFeature, setShowFeature] = useState(false);
+  const [itemFeature, setItemFeature] = useState({});
 
   return (
     <FeatureContext.Provider
-      value={{ showFeature, setShowFeature, itemFeature, setItemFeature}}
+      value={{ showFeature, setShowFeature, itemFeature, setItemFeature }}
     >
-      <Container {...restprops}>{children}</Container>
+      <Container {...restProps}>{children}</Container>
     </FeatureContext.Provider>
   );
 }
 
-Card.Group = function CardGroup({ children, ...restprops }) {
-  return <Group {...restprops}>{children}</Group>;
+Card.Group = function CardGroup({ children, ...restProps }) {
+  return <Group {...restProps}>{children}</Group>;
 };
 
-Card.Title = function CardTitle({ children, ...restprops }) {
-  return <Title {...restprops}>{children}</Title>;
+Card.Title = function CardTitle({ children, ...restProps }) {
+  return <Title {...restProps}>{children}</Title>;
 };
 
-Card.SubTitle = function CardSubTitle({ children, ...restprops }) {
-  return <SubTitle {...restprops}>{children}</SubTitle>;
+Card.SubTitle = function CardSubTitle({ children, ...restProps }) {
+  return <SubTitle {...restProps}>{children}</SubTitle>;
 };
 
-Card.Text = function CardText({ children, ...restprops }) {
-  return <Text {...restprops}>{children}</Text>;
+Card.Text = function CardText({ children, ...restProps }) {
+  return <Text {...restProps}>{children}</Text>;
 };
 
-Card.Entities = function CardEntities({ children, ...restprops }) {
-  return <Entities {...restprops}>{children}</Entities>;
+Card.Entities = function CardEntities({ children, ...restProps }) {
+  return <Entities {...restProps}>{children}</Entities>;
 };
 
-Card.Meta = function CardMeta({ children, ...restprops }) {
-  return <Meta {...restprops}>{children}</Meta>;
+Card.Meta = function CardMeta({ children, ...restProps }) {
+  return <Meta {...restProps}>{children}</Meta>;
 };
 
-Card.Image = function CardImage({ ...restProps }) {
-  return <Image {...restProps} />;
-};
-
-Card.Item = function CardItem({ item, children, ...restprops }) {
+Card.Item = function CardItem({ item, children, ...restProps }) {
   const { setShowFeature, setItemFeature } = useContext(FeatureContext);
 
   return (
@@ -69,15 +66,15 @@ Card.Item = function CardItem({ item, children, ...restprops }) {
         setItemFeature(item);
         setShowFeature(true);
       }}
-      {...restprops}
+      {...restProps}
     >
       {children}
     </Item>
   );
 };
 
-Card.Image = function CardImage({ ...restprops }) {
-  return <Image {...restprops} />;
+Card.Image = function CardImage({ ...restProps }) {
+  return <Image {...restProps} />;
 };
 
 Card.Feature = function CardFeature({ children, category, ...restProps }) {
